@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Temperatura</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: lightblue;
+            transition: background-color 0.5s;
+        }
+
+        table {
+            margin: 0 auto;
+            padding: 10px;
+            border-spacing: 15px;
+            border: 2px solid #000;
+        }
+
+        input[type="number"] {
+            padding: 10px;
+            margin: 5px;
+            width: 100px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        .result {
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+
+        .source-link {
+            margin-top: 20px;
+            font-size: 1em;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Conversor de Temperaturas</h1>
+    <h2>Escolha a conversão desejada:</h2>
+
+    <table>
+        <tr>
+            <td><input id="celsius" type="number" placeholder="Graus Celsius"></td>
+            <td><input id="fahrenheit" type="number" placeholder="Graus Fahrenheit"></td>
+            <td><input id="kelvin" type="number" placeholder="Graus Kelvin"></td>
+        </tr>
+        <tr>
+            <td><button onclick="convertCelsius()">Converter Celsius</button></td>
+            <td><button onclick="convertFahrenheit()">Converter Fahrenheit</button></td>
+            <td><button onclick="convertKelvin()">Converter Kelvin</button></td>
+        </tr>
+    </table>
+
+    <div class="result">
+        <p id="resultCelsius"></p>
+        <p id="resultFahrenheit"></p>
+        <p id="resultKelvin"></p>
+    </div>
+
+    <div class="source-link">
+        <p><a href="https://www.khanacademy.org/science/physics/temperature-and-heat/thermal-energy/a/temperature-conversions" target="_blank">Fonte científica para as fórmulas de conversão</a></p>
+    </div>
+
+    <script>
+        // Funções de conversão
+        function convertCelsius() {
+            let celsius = parseFloat(document.getElementById('celsius').value);
+            if (isNaN(celsius)) {
+                alert("Por favor, insira um valor válido para Celsius.");
+                return;
+            }
+
+            // Converter Celsius para Fahrenheit e Kelvin
+            let fahrenheit = (celsius * 9 / 5) + 32;
+            let kelvin = celsius + 273.15;
+
+            // Exibir os resultados arredondados
+            document.getElementById('resultCelsius').textContent = `Celsius: ${celsius.toFixed(2)}°C`;
+            document.getElementById('resultFahrenheit').textContent = `Fahrenheit: ${fahrenheit.toFixed(2)}°F`;
+            document.getElementById('resultKelvin').textContent = `Kelvin: ${kelvin.toFixed(2)}K`;
+
+            // Mudar o fundo da página de acordo com a temperatura
+            if (celsius <= 0) {
+                document.body.style.backgroundColor = 'lightblue'; // Frio
+            } else if (celsius > 30) {
+                document.body.style.backgroundColor = 'red'; // Quente
+            } else {
+                document.body.style.backgroundColor = 'yellow'; // Ameno
+            }
+        }
+
+        function convertFahrenheit() {
+            let fahrenheit = parseFloat(document.getElementById('fahrenheit').value);
+            if (isNaN(fahrenheit)) {
+                alert("Por favor, insira um valor válido para Fahrenheit.");
+                return;
+            }
+
+            // Converter Fahrenheit para Celsius e Kelvin
+            let celsius = (fahrenheit - 32) * 5 / 9;
+            let kelvin = celsius + 273.15;
+
+            // Exibir os resultados arredondados
+            document.getElementById('resultCelsius').textContent = `Celsius: ${celsius.toFixed(2)}°C`;
+            document.getElementById('resultFahrenheit').textContent = `Fahrenheit: ${fahrenheit.toFixed(2)}°F`;
+            document.getElementById('resultKelvin').textContent = `Kelvin: ${kelvin.toFixed(2)}K`;
+
+            // Mudar o fundo da página de acordo com a temperatura
+            if (celsius <= 0) {
+                document.body.style.backgroundColor = 'lightblue'; // Frio
+            } else if (celsius > 30) {
+                document.body.style.backgroundColor = 'red'; // Quente
+            } else {
+                document.body.style.backgroundColor = 'yellow'; // Ameno
+            }
+        }
+
+        function convertKelvin() {
+            let kelvin = parseFloat(document.getElementById('kelvin').value);
+            if (isNaN(kelvin)) {
+                alert("Por favor, insira um valor válido para Kelvin.");
+                return;
+            }
+
+            // Converter Kelvin para Celsius e Fahrenheit
+            let celsius = kelvin - 273.15;
+            let fahrenheit = (celsius * 9 / 5) + 32;
+
+            // Exibir os resultados arredondados
+            document.getElementById('resultCelsius').textContent = `Celsius: ${celsius.toFixed(2)}°C`;
+            document.getElementById('resultFahrenheit').textContent = `Fahrenheit: ${fahrenheit.toFixed(2)}°F`;
+            document.getElementById('resultKelvin').textContent = `Kelvin: ${kelvin.toFixed(2)}K`;
+
+            // Mudar o fundo da página de acordo com a temperatura
+            if (celsius <= 0) {
+                document.body.style.backgroundColor = 'lightblue'; // Frio
+            } else if (celsius > 30) {
+                document.body.style.backgroundColor = 'red'; // Quente
+            } else {
+                document.body.style.backgroundColor = 'yellow'; // Ameno
+            }
+        }
+
+        // Evento para validar inputs ao digitar
+        document.getElementById('celsius').oninput = function() {
+            let input = parseFloat(this.value);
+            if (isNaN(input)) {
+                this.style.borderColor = 'red';
+            } else {
+                this.style.borderColor = 'green';
+            }
+        };
+
+        document.getElementById('fahrenheit').oninput = function() {
+            let input = parseFloat(this.value);
+            if (isNaN(input)) {
+                this.style.borderColor = 'red';
+            } else {
+                this.style.borderColor = 'green';
+            }
+        };
+
+        document.getElementById('kelvin').oninput = function() {
+            let input = parseFloat(this.value);
+            if (isNaN(input)) {
+                this.style.borderColor = 'red';
+            } else {
+                this.style.borderColor = 'green';
+            }
+        };
+    </script>
+
+</body>
+</html>
